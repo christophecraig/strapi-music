@@ -4,7 +4,8 @@
   "info": {
     "singularName": "track",
     "pluralName": "tracks",
-    "displayName": "Track"
+    "displayName": "Track",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,9 @@
       "relation": "manyToMany",
       "target": "api::artist.artist",
       "inversedBy": "tracks"
+    },
+    "Title": {
+      "type": "string"
     }
   }
 }

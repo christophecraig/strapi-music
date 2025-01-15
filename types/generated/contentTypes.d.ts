@@ -401,6 +401,7 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
 export interface ApiTrackTrack extends Struct.CollectionTypeSchema {
   collectionName: 'tracks';
   info: {
+    description: '';
     displayName: 'Track';
     pluralName: 'tracks';
     singularName: 'track';
@@ -418,6 +419,7 @@ export interface ApiTrackTrack extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::track.track'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
