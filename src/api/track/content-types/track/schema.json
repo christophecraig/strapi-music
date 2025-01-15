@@ -23,6 +23,12 @@
     },
     "Title": {
       "type": "string"
+    },
+    "albums": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::album.album",
+      "mappedBy": "tracks"
     }
   }
 }

@@ -369,6 +369,35 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAlbumAlbum extends Struct.CollectionTypeSchema {
+  collectionName: 'albums';
+  info: {
+    displayName: 'Album';
+    pluralName: 'albums';
+    singularName: 'album';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    artists: Schema.Attribute.Relation<'manyToMany', 'api::artist.artist'>;
+    Cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::album.album'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    ReleaseDate: Schema.Attribute.Date;
+    Title: Schema.Attribute.String;
+    tracks: Schema.Attribute.Relation<'manyToMany', 'api::track.track'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
   collectionName: 'artists';
   info: {
@@ -380,6 +409,7 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    albums: Schema.Attribute.Relation<'manyToMany', 'api::album.album'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -410,6 +440,7 @@ export interface ApiTrackTrack extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    albums: Schema.Attribute.Relation<'manyToMany', 'api::album.album'>;
     artists: Schema.Attribute.Relation<'manyToMany', 'api::artist.artist'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -935,6 +966,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::album.album': ApiAlbumAlbum;
       'api::artist.artist': ApiArtistArtist;
       'api::track.track': ApiTrackTrack;
       'plugin::content-releases.release': PluginContentReleasesRelease;
