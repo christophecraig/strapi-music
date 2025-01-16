@@ -26,3 +26,16 @@ jobs:
       run: pnpm install
     - name: Build
       run: pnpm run build
+    - name: Deploy
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ~/workspace/strapi-music
+          git pull
+          pnpm run build
+          pm2 restart 0
+      
