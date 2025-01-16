@@ -29,6 +29,12 @@
       "relation": "manyToMany",
       "target": "api::album.album",
       "mappedBy": "tracks"
+    },
+    "genres": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::genre.genre",
+      "mappedBy": "tracks"
     }
   }
 }

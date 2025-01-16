@@ -385,6 +385,7 @@ export interface ApiAlbumAlbum extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    genres: Schema.Attribute.Relation<'manyToMany', 'api::genre.genre'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::album.album'> &
       Schema.Attribute.Private;
@@ -413,6 +414,7 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    genres: Schema.Attribute.Relation<'manyToMany', 'api::genre.genre'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -420,6 +422,34 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     Name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    tracks: Schema.Attribute.Relation<'manyToMany', 'api::track.track'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGenreGenre extends Struct.CollectionTypeSchema {
+  collectionName: 'genres';
+  info: {
+    displayName: 'Genre';
+    pluralName: 'genres';
+    singularName: 'genre';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    albums: Schema.Attribute.Relation<'manyToMany', 'api::album.album'>;
+    artists: Schema.Attribute.Relation<'manyToMany', 'api::artist.artist'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::genre.genre'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     tracks: Schema.Attribute.Relation<'manyToMany', 'api::track.track'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -446,6 +476,7 @@ export interface ApiTrackTrack extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Duration: Schema.Attribute.Integer;
+    genres: Schema.Attribute.Relation<'manyToMany', 'api::genre.genre'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::track.track'> &
       Schema.Attribute.Private;
@@ -968,6 +999,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::album.album': ApiAlbumAlbum;
       'api::artist.artist': ApiArtistArtist;
+      'api::genre.genre': ApiGenreGenre;
       'api::track.track': ApiTrackTrack;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

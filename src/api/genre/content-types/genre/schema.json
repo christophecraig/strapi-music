@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "genres",
+  "info": {
+    "singularName": "genre",
+    "pluralName": "genres",
+    "displayName": "Genre"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "albums": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::album.album",
+      "inversedBy": "genres"
+    },
+    "artists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::artist.artist",
+      "inversedBy": "genres"
+    },
+    "tracks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::track.track",
+      "inversedBy": "genres"
+    }
+  }
+}

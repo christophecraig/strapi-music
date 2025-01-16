@@ -38,6 +38,12 @@
       "relation": "manyToMany",
       "target": "api::track.track",
       "inversedBy": "albums"
+    },
+    "genres": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::genre.genre",
+      "mappedBy": "albums"
     }
   }
 }
