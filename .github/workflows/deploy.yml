@@ -33,5 +33,10 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd ~/workspace/strapi-music && git pull && pnpm run build && pm2 restart 0
+        script: export NVM_DIR=~/.nvm &&
+          source ~/.nvm/nvm.sh &&
+          cd ~/workspace/strapi-music && 
+          git pull && 
+          pnpm run build && 
+          pm2 restart 0
       
